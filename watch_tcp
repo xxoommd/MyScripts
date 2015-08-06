@@ -1,0 +1,8 @@
+#! /usr/bin/ruby
+
+while true
+	print(Time.now.to_s + ": ");
+	system("netstat -ct|grep 203.195.164.98")
+	print("\n")
+	sleep 2
+end

@@ -1,0 +1,34 @@
+#! /usr/bin/ruby
+
+require 'pathname'
+require 'fileutils'
+
+dir = ARGV[0] || "/Users/gaofei/Projects/jssanguo"
+PRJ_DIR = Pathname.new(dir)
+SRC_DIR = Pathname.new "#{PRJ_DIR}/src"
+RES_DIR = Pathname.new "#{PRJ_DIR}/res"
+RUN_DIR = Pathname.new "#{PRJ_DIR}/runtime/mac/jssanguo Mac.app"
+DEST_DIR = Pathname.new "#{PRJ_DIR}/runtime/mac/jssanguo Mac.app/Contents/Resources"
+
+if not File.exist?(RUN_DIR)
+	puts '😡  No built app, rebuilding...'
+	exec("cocos run -s #{PRJ_DIR} -p mac -j 4")
+else
+	# Removing old directories.
+	puts('😳  Removing old res and src...')
+	if File.exist?(DEST_DIR + '/project.json')
+		FileUtils.rm(DEST_DIR + '/project.json')
+	end
+	FileUtils.rm_rf(DEST_DIR + 'res')
+	FileUtils.rm_rf(DEST_DIR + 'src')
+
+	# Copying new res and src.
+	puts('😍  Copying new res and src...')
+	FileUtils.cp(PRJ_DIR + 'project.json', DEST_DIR)
+	FileUtils.cp_r(SRC_DIR, DEST_DIR)
+	FileUtils.cp_r(RES_DIR, DEST_DIR)
+
+	puts('😚  Done, start running...')
+
+	exec("#{PRJ_DIR}/runtime/mac/'jssanguo Mac.app'/Contents/MacOS/'jssanguo Mac'")
+end

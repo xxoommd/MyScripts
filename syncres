@@ -1,0 +1,63 @@
+#! /usr/bin/ruby
+
+# require 'pathname'
+require 'fileutils'
+# require 'digest'
+
+# FOO = '美术/UI_v2.0'
+# ORIGIN_DIR = "/Users/gaofei/360云盘/三国/#{FOO}"
+# TARGET_DIR = "/Users/gaofei/Desktop/#{FOO.split('/').last}"
+
+# def getRelativePath(fullpath, root)
+# 	fullpath.sub(root, '')
+# end
+
+# def getMD5OfFile(fullpath)
+# 	Digest::MD5.file(fullpath).hexdigest
+# end
+
+# Dir[ORIGIN_DIR].each do |filepath|
+# 	relativePath = getRelativePath(filepath)
+# end
+
+# if (File.exists?(TARGET_DIR))
+#	puts('* Removing old directory...')
+#	FileUtils.rm_rf(TARGET_DIR)
+# end
+# puts('* Copying directory...')
+# FileUtils.cp_r(ORIGIN_DIR, TARGET_DIR)
+# BACKUP_DIR = TARGET_DIR + '/Backup'
+# FileUtils.rm_rf(BACKUP_DIR)
+
+ROOT_DIR = "/Users/gaofei/Documents/360cloud/三国"
+DEST_DIR = "/Users/gaofei/Desktop/sanguo"
+NEED_TO_BACKUP = ["/程序", "/策划", "/美术/UI_v3.0"]
+
+if File.exists?(DEST_DIR)
+	puts("😚  clean old directory: <#{DEST_DIR}>...")
+	FileUtils.rm_rf(DEST_DIR)
+end
+FileUtils.mkdir(DEST_DIR)
+
+NEED_TO_BACKUP.each do |sub_name|
+	ori = ROOT_DIR + sub_name
+	puts "😍  Updating: <#{sub_name}>..."
+	FileUtils.cp_r(ori, DEST_DIR)
+end
+
+BACKUP_DIR = "#{DEST_DIR}/UI_v3.0/Backup"
+if File.exists?(BACKUP_DIR)
+	puts("😚  Clean 'Backup' directory...")
+	FileUtils.rm_rf(BACKUP_DIR)
+	FileUtils.mkdir(BACKUP_DIR)
+	system("sudo chmod -w " + BACKUP_DIR)
+end
+
+commands = [
+	"cd #{DEST_DIR} && git init . && git add . && git commit -m 'update';"
+]
+
+# commands.each do |cmd|
+# 	system(cmd)
+# end
+
