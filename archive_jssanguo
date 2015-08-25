@@ -54,6 +54,7 @@ def main()
 	puts "[2] PK to Enterprise"
 	puts "[3] Export 'PK to App Store' to IPA"
 	puts "[4] Export 'PK to Enterprise' to IPA"
+	puts "\n[*] Other keys to quit."
 
 	select_id = gets.to_i
 
@@ -69,7 +70,7 @@ def main()
 			export_IPA 'PK to Enterprise'
 		end	
 	else
-		puts "\033[31mError: \033[0m" + "Invalid Target: #{select_id}"
+		puts "\033[31mError: \033[0m" + "Quit."
 	end
 end
 
