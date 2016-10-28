@@ -1,9 +1,0 @@
-#! /usr/bin/ruby
-
-PROJECT_PATH = '/Users/gaofei/Projects/jssanguo'
-JS_PATH = "#{PROJECT_PATH}/src"
-JSC_PATH = "#{PROJECT_PATH}/src_jsc/src"
-CONF_PATH = "#{PROJECT_PATH}/compiler_config_sample.json"
-
-command = "cocos jscompile -s #{JS_PATH} -d #{JSC_PATH} -j #{CONF_PATH}"
-system(command)

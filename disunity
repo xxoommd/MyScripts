@@ -1,2 +1,0 @@
-#! /bin/bash
-java -jar "/Users/gaofei/Scripts/A/disunity/disunity.jar" "$@"

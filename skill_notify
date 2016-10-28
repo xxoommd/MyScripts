@@ -1,6 +1,0 @@
-#! /usr/bin/ruby
-
-while true
-	sleep(3600)
-	system("terminal-notifier -message 'Skill Full' -title 'jssanguo'")
-end

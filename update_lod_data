@@ -1,0 +1,41 @@
+#! /bin/bash
+
+SOURCE_PATH=$1
+PROJECT_DATA_PATH=$2
+
+if [ ! -d $SOURCE_PATH ]; then
+	echo "[Err] Directory '$SOURCE_PATH' not exist." 
+	exit 1
+fi
+
+if [ ! -d $SOURCE_PATH/json ]; then
+	echo "[Err] Directory '$SOURCE_PATH/json' not exist." 
+	exit 1
+fi
+
+if [ ! -d $SOURCE_PATH/mapJson ]; then
+	echo "[Err] Directory '$SOURCE_PATH/mapJson' not exist." 
+	exit 1
+fi
+
+if [ "$PROJECT_DATA_PATH" == "" ]; then
+	echo "PROJECT_DATA_PATH is empty use default"
+	PROJECT_DATA_PATH=~/Projects/lod/lod_server/data
+fi
+
+if [ ! -d "$PROJECT_DATA_PATH" ]; then
+	echo "[Err] Directory '$PROJECT_DATA_PATH' not exist."
+	exit 1
+fi
+
+echo "[*] SOURCE_PATH=$SOURCE_PATH"
+echo "[*] PROJECT_DATA_PATH=$PROJECT_DATA_PATH"
+
+echo "[*] Removing old files..."
+rm -rf $PROJECT_DATA_PATH
+echo "[*] Copy data/*.json..."
+cp -r $SOURCE_PATH/json $PROJECT_DATA_PATH
+echo "[*] Copy data/map/*.json..."
+cp -r $SOURCE_PATH/mapJson $PROJECT_DATA_PATH/map
+echo "[Done] Success!"
+exit 0
