@@ -65,7 +65,7 @@ else
 			fi
 		elif [ $1 == "add" ]; then
 			if [ -z "$2" ]; then
-				absPath= `pwd`
+				absPath=`pwd`
 			else
 				getAbsPath $2
 			fi
@@ -73,7 +73,7 @@ else
 			if [ $? == 0 ]; then
 				# 判断当前GOPATH是否已经包含该路径
 				if [[ ":$GOPATH" != *":$absPath"* ]]; then
-					export GOPATH=$absPath
+					export GOPATH=$GOPATH:$absPath
 					printSucc
 				else
 					echo -e "[${YELLOW}Notice${NC}] '$absPath' is already in GOPATH"
