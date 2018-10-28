@@ -8,8 +8,7 @@ sudo cp /tmp/sysctl.conf /etc/
 sudo sysctl -p; lsmod |grep bbr
 
 echo "Installing docker..."
-curl -fsSL get.docker.com -o get-docker.sh
-sh get-docker.sh
+curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 sudo usermod -aG docker `whoami`
 sudo systemctl enable docker
 sudo systemctl start docker
