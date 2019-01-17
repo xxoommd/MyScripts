@@ -1,5 +1,7 @@
 #!/bin/bash
-  
+
+sudo apt update -y && apt upgrade -y
+
 echo "Open bbr..."
 cp /etc/sysctl.conf /tmp/
 echo "net.core.default_qdisc=fq" >> /tmp/sysctl.conf
