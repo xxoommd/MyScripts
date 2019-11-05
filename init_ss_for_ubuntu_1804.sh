@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt update -y && apt upgrade -y
+sudo apt update -y && sudo apt upgrade -y
 
 echo "Open bbr..."
 cp /etc/sysctl.conf /tmp/
